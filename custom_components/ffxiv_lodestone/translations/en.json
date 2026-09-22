@@ -1,0 +1,40 @@
+{
+  "title": "FFXIV Lodestone",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add FFXIV character",
+        "description": "Enter the public Lodestone character ID and region. [Find your character on the Lodestone]({character_search_url}), open the profile, and use the numeric ID from the profile URL.",
+        "data": {
+          "character_id": "Character ID",
+          "region": "Region"
+        },
+        "data_description": {
+          "character_id": "Example profile URL: `/lodestone/character/12345678/` \u2192 Character ID `12345678`.",
+          "region": "The Lodestone region hosting the character profile."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the Lodestone.",
+      "character_not_found": "Character not found."
+    },
+    "abort": {
+      "already_configured": "This character is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "FFXIV Lodestone options",
+        "description": "Choose how often Lodestone character data is refreshed.",
+        "data": {
+          "refresh_minutes": "Refresh interval (minutes)"
+        },
+        "data_description": {
+          "refresh_minutes": "Minimum 5 minutes. Default 30 minutes."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "domain": "ffxiv_lodestone",
+  "name": "FFXIV Lodestone",
+  "version": "1.0.0",
+  "codeowners": [
+    "@rstuke82"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/rstuke82/ha-ffxiv-lodestone",
+  "issue_tracker": "https://github.com/rstuke82/ha-ffxiv-lodestone/issues",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": [
+    "beautifulsoup4==4.13.4"
+  ]
+}
