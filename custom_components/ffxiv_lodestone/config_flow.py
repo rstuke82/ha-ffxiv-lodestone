@@ -37,7 +37,8 @@ class FFXIVLodestoneConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
+        self,
+        user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
         """Configure a character by Lodestone character ID."""
         errors: dict[str, str] = {}
@@ -78,14 +79,21 @@ class FFXIVLodestoneConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_CHARACTER_ID): str,
-                    vol.Required(CONF_REGION, default=DEFAULT_REGION): SelectSelector(
-                        SelectSelectorConfig(options=list(SUPPORTED_REGIONS))
+                    vol.Required(
+                        CONF_REGION,
+                        default=DEFAULT_REGION,
+                    ): SelectSelector(
+                        SelectSelectorConfig(
+                            options=list(SUPPORTED_REGIONS),
+                        )
                     ),
                 }
             ),
             errors=errors,
             description_placeholders={
-                "character_search_url": "https://na.finalfantasyxiv.com/lodestone/character/"
+                "character_search_url": (
+                    "https://na.finalfantasyxiv.com/lodestone/character/"
+                )
             },
         )
 
@@ -93,21 +101,23 @@ class FFXIVLodestoneConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     def async_get_options_flow(
         config_entry: ConfigEntry,
     ) -> FFXIVLodestoneOptionsFlow:
-        return FFXIVLodestoneOptionsFlow(config_entry)
+        """Return the options flow handler."""
+        return FFXIVLodestoneOptionsFlow()
 
 
 class FFXIVLodestoneOptionsFlow(config_entries.OptionsFlow):
     """Configure integration options."""
 
-    def __init__(self, config_entry: ConfigEntry) -> None:
-        self.config_entry = config_entry
-
     async def async_step_init(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
+        """Manage FFXIV Lodestone options."""
         if user_input is not None:
-            return self.async_create_entry(title="", data=user_input)
+            return self.async_create_entry(
+                title="",
+                data=user_input,
+            )
 
         current = self.config_entry.options.get(
             CONF_REFRESH_MINUTES,
